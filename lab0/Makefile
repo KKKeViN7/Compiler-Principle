@@ -1,4 +1,4 @@
-.PHONY: pre, lexer, ast-gcc, ast-llvm, cfg, ir-gcc, ir-llvm, asm, obj, exe, antiobj, antiexe, arm, test-arm, dot
+.PHONY: pre, lexer, ast-gcc, ast-llvm, cfg, ir-gcc, ir-llvm, asm, obj, exe, antiobj, antiexe, arm, test-arm, dot, test
 pre:
 	gcc main.c -E -o main.i
 
@@ -22,7 +22,9 @@ ir-gcc:
 
 ir-llvm:
 	clang -S -emit-llvm main.c
-	clang main.ll -o main_llvm
+test:
+	clang test.ll -o test
+	./test
 
 asm:
 	gcc -O0 -o main.S -S -masm=att main.i

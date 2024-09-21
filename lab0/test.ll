@@ -9,8 +9,8 @@ target triple = "x86_64-pc-linux-gnu"
 ;定义全局变量str，是一个长度为50的字符串
 @str = global i8* getelementptr inbounds ([50 x i8], [50 x i8]* @.str, i32 0, i32 0), align 8
 
-;定义全局变量数组a[3] int a[3]={1,1,0};
-@a = global [3 x i32] [i32 1, i32 1, i32 0], align 4
+;定义全局变量数组a[3] int a[3]={0,1,0};
+@a = global [3 x i32] [i32 0, i32 1, i32 0], align 4
 
 ;定义全局字符串常量，分别是错误输入的字符串和输入输出格式控制字符
 @.str = private unnamed_addr constant [50 x i8] c"The input n should be greater than or equal to 0!\00", align 1
@@ -20,7 +20,7 @@ target triple = "x86_64-pc-linux-gnu"
 
 ;定义函数fibonacci，返回值类型为整形，有一个整型的参数
 define i32 @fibonacci(i32 %0) {
-  ;传递参数，先通过0%，再赋值给%2
+  ;传递参数，先通过%0，再赋值给%2
   %2 = alloca i32, align 4
   store i32 %0, i32* %2, align 4  ;%2=n
   br label %3

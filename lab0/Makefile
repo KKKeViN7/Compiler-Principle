@@ -1,4 +1,4 @@
-.PHONY: pre, lexer, ast-gcc, ast-llvm, cfg, ir-gcc, ir-llvm, asm, obj, exe, antiobj, antiexe, arm, test-arm, dot, test
+.PHONY: pre, lexer, ast-gcc, ast-llvm, cfg, ir-gcc, ir-llvm, asm, obj, exe, antiobj, antiexe, arm, test-arm, dot, test1, test2, test3
 pre:
 	gcc main.c -E -o main.i
 
@@ -22,7 +22,8 @@ ir-gcc:
 
 ir-llvm:
 	clang -S -emit-llvm main.c
-test:
+
+test1:
 	clang test.ll -o test
 	./test
 
@@ -32,6 +33,14 @@ asm:
 arm:
 	arm-linux-gnueabihf-gcc main.c -S -o main_arm.S 
 	arm-linux-gnueabihf-gcc main_arm.S -o main_arm -static
+
+test2:
+	arm-linux-gnueabihf-gcc fac.S -o fac.out
+	qemu-arm -L /usr/arm-linux-gnueabihf ./fac.out
+	
+test3:
+	arm-linux-gnueabihf-gcc fib.S -o fib.out
+	qemu-arm -L /usr/arm-linux-gnueabihf ./fib.out
 
 obj:
 	gcc -O0 -c -o main.o main.S

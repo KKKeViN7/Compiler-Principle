@@ -2,7 +2,7 @@
 const float neg = -1.0;
 float res = 0;
 char* str= "The input n should be greater than or equal to 0!";
-int a[3]={1,1,0};
+int a[3]={0,1,0};
 
 int fibonacci(int n)
 {

@@ -35,10 +35,9 @@ define i32 @fibonacci(i32 %0) {
   ;a[2] = a[0] + a[1];
   ;getelementptr inbounds是获取元素指针的指令，inbounds表示在边界内进行访问，即不会越界
   ;arg: 类型 指针 元素索引（行/列）
-  ;nsw是add指令的一个修饰符，表示进行有符号整数加法时，不进行溢出检查（no signed wrap）
   %7 = load i32, i32* getelementptr inbounds ([3 x i32], [3 x i32]* @a, i64 0, i64 0), align 4
   %8 = load i32, i32* getelementptr inbounds ([3 x i32], [3 x i32]* @a, i64 0, i64 1), align 4
-  %9 = add nsw i32 %7, %8
+  %9 = add i32 %7, %8
   store i32 %9, i32* getelementptr inbounds ([3 x i32], [3 x i32]* @a, i64 0, i64 2), align 4
   
   ;a[0] = a[1];
@@ -51,7 +50,7 @@ define i32 @fibonacci(i32 %0) {
 
   ;n = n - 1;
   %12 = load i32, i32* %2, align 4
-  %13 = sub nsw i32 %12, 1
+  %13 = sub i32 %12, 1
   store i32 %13, i32* %2, align 4
   br label %3
 
